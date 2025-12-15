@@ -2,7 +2,7 @@
 
 ## Overview
 
-An executive-level analytics dashboard built in ServiceNow to provide real-time visibility into maintenance operations, compliance health, and process efficiency. This project demonstrates business intelligence, data visualization, and the ability to translate operational metrics into executive-level dashboards.
+Provides executive-level real-time visibility into maintenance operations, compliance health, and process efficiency through a consolidated analytics dashboard. Demonstrates **business intelligence capabilities** by translating operational data into strategic KPIs: compliance risk indicators, process bottleneck detection, efficiency metrics, and resource allocation insights.
 
 ## Business Problem Solved
 
@@ -158,7 +158,7 @@ This dashboard approach applies to:
 - **Healthcare:** Equipment maintenance and compliance
 - **Manufacturing:** Preventive maintenance scheduling
 
-Shows understanding of how to go beyond ticketing to provide strategic visibility.
+Demonstrates understanding of strategic visibility—going beyond operational ticketing to provide executive decision-support through data-driven insights.
 
 ## Screenshots
 
