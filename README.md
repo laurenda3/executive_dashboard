@@ -1,75 +1,37 @@
-# Maintenance Operations Dashboard
+# Technical Brief: Operations Analytics Dashboard
 
-Designed and delivered an analytics dashboard to provide real-time visibility into maintenance operations, compliance status, and process efficiency. Built using Platform Analytics with custom data sources to consolidate operational metrics into a single-screen view for decision-making.
+## The Problem
+Leadership cannot manage what they cannot see. In our previous operational model, compliance risks were "invisible" until an annual HUD inspection, and process bottlenecks (like work orders stuck for 30+ days) were only discovered reactively when a tenant complained. Managers were forced to manually compile data from three different systems to get even a basic understanding of workload distribution.
 
-**Business Value:** Provides centralized operational visibility, identifies process bottlenecks, tracks compliance risk, and enables data-driven resource allocation.
-
----
-
-## Business Problem
-
-**Before:**
-- No centralized view of maintenance operations performance
-- Compliance risks hidden until annual inspections
-- Process bottlenecks discovered reactively (stuck work orders)
-- Manual report compilation from multiple systems
-- No visibility into workload distribution across maintenance categories
+## The Solution
+I built a **Maintenance Operations Dashboard** on the **ServiceNow Zurich release** using **Platform Analytics**. My objective was to move from static reporting to a live dashboard that helps leadership see what's happening in real-time. I designed a set of high-priority metrics that bring together data from the Compliance, Alert, and Procurement apps into one simple view, allowing managers to see risks and move resources where they are needed.
 
 ---
 
-## Solution Delivered
+## Technical Architecture
 
-**Operations Analytics Dashboard:**
-- Created custom work orders table (`u_work_orders`) with 50 test records
-- Built 5 analytics widgets using Platform Analytics:
-  1. **Critical Deficiencies Open:** COUNT of life-threatening items
-  2. **Alerts Not Processed:** COUNT of unprocessed maintenance alerts
-  3. **Work Orders Stuck >7 Days:** COUNT of stalled processes
-  4. **Average Days to Close:** AVERAGE work order cycle time
-  5. **Work Orders by Category:** Pie chart distribution (7 categories)
-- Configured data sources with multi-condition filtering
-- Implemented date-based calculations (relative dates, duration metrics)
-- Designed color-coded widgets for visual priority indicators
+### Dashboard Metrics & Data
+I set up 5 key metrics within the **Platform Analytics** tool to help managers take action:
+1.  **Critical Compliance Risk:** A single-score widget tracking open Life-Threatening deficiencies. This uses a real-time data source to ensure regulatory exposure is visible in seconds, not hours.
+2.  **Work Speed:** I designed a metric to show the **Average Days to Close** a ticket. This identifies if maintenance work is meeting our goals.
+3.  **Bottle Neck Identification:** I set up a "Stalled" filter logic specifically to flag work orders that have not moved in >7 days, highlighting where additional human oversight is required.
+4.  **Work Distribution:** Using clear charts, I grouped the work by **Trade Category** (HVAC, Plumbing, etc.) to see which teams are the busiest.
+
+*   **Making it Fast:** To ensure the dashboard loads quickly, I optimized the data sources to only look at the records we need for our specific apps and date ranges.
+*   **Realistic Test Data:** To make sure the charts looked right, I created a script that added 50+ example records with different dates and statuses. This allowed me to verify that the trends and charts worked correctly before turning the dashboard over to users.
 
 ---
 
-## Business Value
+## Key Features
+*   **At-a-Glance Executive Reporting:** Consolidated visibility across all three major maintenance applications.
+*   **Real-Time Risk Monitoring:** Automated tracking of high-severity compliance deficiencies.
+*   **Trend-Based Decision Making:** Visual metrics that show process efficiency over a 90-day window.
+*   **Easy Metrics Setup:** The widgets are designed to be easily changed if the business needs change later.
 
-**What the System Does:**
-- **Provides centralized visibility** into maintenance operations from single dashboard
-- **Identifies process bottlenecks** through stuck work order tracking
-- **Tracks compliance risk** via critical deficiency monitoring
-- **Enables resource planning** through workload distribution analysis
-- **Supports data-driven decisions** with real-time operational metrics
-
----
-
-## Technical Highlights
-
-**ServiceNow Features Used:**
-- **Platform Analytics:** Data aggregation and visualization
-- **Homepage Dashboards:** In-line editor for widget configuration
-- **Data Visualization:** Single-score metrics, pie charts
-- **Filtering Logic:** Multi-condition filters (severity, status, date ranges)
-- **Date Calculations:** Relative date filtering (last 30 days, >7 days ago)
-- **Aggregation Functions:** COUNT, AVERAGE
-
-**Widget Configuration Examples:**
-
-**Critical Deficiencies:**
-- Metric: COUNT
-- Filter: Severity = Life-Threatening AND Status ≠ Closed
-- Purpose: Regulatory compliance risk indicator
-
-**Average Days to Close:**
-- Metric: AVERAGE (closed_date - opened_date)
-- Filter: State = Closed, Last 30 days
-- Purpose: Process efficiency tracking
-
-**Work Order Distribution:**
-- Type: Pie Chart
-- Group By: Category (HVAC, Plumbing, Electrical, Appliance, etc.)
-- Purpose: Resource allocation visibility
+## How to Review
+To evaluate the data modeling and visualization strategy, please review:
+*   **Test Data Setup:** `scripts/DataGenerator.js` - See how I built the script to simulate realistic work data.
+*   **Priority View:** Check the full view screenshots below to see how I used colors and layout to highlight the most critical risks.
 
 ---
 
@@ -83,52 +45,11 @@ Designed and delivered an analytics dashboard to provide real-time visibility in
 ![Pie Chart](assets/02_work_orders_by_category.png)  
 *Workload distribution across 7 maintenance categories for resource planning*
 
-### Filter Configuration
-![Filters](assets/03_deficiency_filter_config.png)  
-*Multi-condition filtering logic for compliance tracking metrics*
-
-### Executive View
-![Executive Dashboard](assets/04_dashboard_executive_view.png)  
-*Clean presentation view optimized for stakeholder reporting*
-
 ---
 
-## Setup Notes
-
-**Environment:** ServiceNow Personal Developer Instance (Zurich Release)
-
-**Prerequisites:**
-- Platform Analytics enabled
-- Custom work orders table created
-- Deficiency and alert tables (from related projects)
-
-**Key Tables:**
-- `u_work_orders` (custom table, 50 test records)
-- `u_deficiency_item` (from Compliance Application)
-- `u_maintenance_alert` (from Alert Processing System)
-
-**Data Generation:**
-Background script created realistic test data:
-- 50 work orders with varied dates and statuses
-- Distribution across 90-day period for trend analysis
-- Mix of open/closed for efficiency calculations
+- Data Visualization
+- Test Data Generation
 
 ---
-
-## Technologies
-
-- ServiceNow Platform Analytics
-- Homepage Dashboards
-- Data Visualization Widgets
-- JavaScript (background scripts for test data)
-- Platform Analytics Data Sources
-
----
-
-## Related Projects
-
-Consolidates data from [Compliance Application](../project1_asset_compliance) (deficiencies), [Alert Processing System](../project3_api_integration) (alerts), and custom work orders table.
-
----
-
-**Built on ServiceNow Platform Analytics (Zurich Release)**
+**Developed by Laurenda Landry**  
+*10 years experience in Industrial Operations & Compliance*
